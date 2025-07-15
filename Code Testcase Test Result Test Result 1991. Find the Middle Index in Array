@@ -1,0 +1,29 @@
+class Solution {
+
+    int lSumFunc(int lSum, int pivot, int[] nums) {
+        for(int i=0;i<pivot;i++) {
+            lSum += nums[i];
+        }
+        return lSum;
+    }
+
+    int rSumFunc(int rSum, int pivot, int[] nums) {
+        for(int i=pivot+1;i<nums.length;i++) {
+            rSum += nums[i];
+        }
+        return rSum;
+    }
+
+    public int findMiddleIndex(int[] nums) {
+        int pivot = 0;
+        int rSum = 0;
+        int lSum = 0;
+
+        for(pivot=0;pivot<nums.length;pivot++) {
+            if(lSumFunc(lSum,pivot,nums) == rSumFunc(rSum,pivot,nums)) {
+                return pivot;
+            }
+        }
+        return -1;
+    }
+}
