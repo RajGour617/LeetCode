@@ -1,0 +1,24 @@
+class Solution {
+
+    public int arraySum(int[] nums) {
+        int sum = 0;
+        for(int i=0;i<nums.length;i++) {
+            sum += nums[i];
+        }
+        return sum;
+    }
+
+    public int pivotIndex(int[] nums) {
+        int lSum = 0;
+        int rSum = arraySum(nums);
+
+        for(int p=0; p<nums.length;p++) {
+            rSum -= nums[p];
+            if(lSum == rSum) {
+                return p;
+            }
+            lSum += nums[p];
+        }
+        return -1;
+  }
+}
