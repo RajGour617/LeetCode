@@ -1,0 +1,22 @@
+class Solution {
+    public int dominantIndices(int[] nums) {
+        int res = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            int nextAvg = nextAverage(nums, i + 1);
+            if (nums[i] > nextAvg) {
+                res++;
+            }
+        }
+
+        return res;
+    }
+
+    private int nextAverage(int[] nums, int k) {
+        int sum = 0;
+        for (int i = k; i < nums.length; i++) {
+            sum += nums[i];
+        }
+
+        return sum / (nums.length - k);
+    }
+}
