@@ -1,0 +1,30 @@
+class Solution {
+    public int longestBalanced(String s) {
+        int maxLength = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            int[] freq = new int[26]; //reset all frequencies for every start index
+            for (int j = i; j < s.length(); j++) {
+                freq[s.charAt(j) - 'a']++;
+
+                if (checkBalanced(freq)) {
+                    maxLength = Math.max(maxLength, j - i + 1);
+                }
+            }
+        }
+        return maxLength;
+    }
+
+    private boolean checkBalanced(int[] freq) {
+        int commonFreq = 0;
+        for (int f : freq) {
+            if (f == 0)
+                continue;
+            if (commonFreq == 0)
+                commonFreq = f;
+            else if (f != commonFreq)
+                return false;
+        }
+        return true;
+    }
+}
