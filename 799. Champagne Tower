@@ -1,0 +1,39 @@
+class Solution {
+
+    double[][] tower = new double[101][101];
+
+    private double solve(int poured, int i, int j) {
+        if (i < 0 || j < 0 || i < j) {
+            return 0.0;
+        }
+        if (i == 0 && j == 0) { // we reached the top glass
+            return poured;
+        }
+        if (tower[i][j] != -1) {
+            return tower[i][j];
+        }
+
+        double up_left = (solve(poured, i - 1, j - 1) - 1) / 2.0;
+        double up_right = (solve(poured, i - 1, j) - 1) / 2.0;
+
+        if (up_left < 0.0)
+            up_left = 0.0;
+        if (up_right < 0.0)
+            up_right = 0.0;
+
+        return tower[i][j] = up_left + up_right;
+    }
+
+    public double champagneTower(int poured, int query_row, int query_glass) {
+        for (int i = 0; i < 101; i++) {
+            for (int j = 0; j < 101; j++) {
+                tower[i][j] = -1;
+            }
+        }
+
+        if(solve(poured, query_row, query_glass) > 1.0) {
+            return 1.0;
+        }
+        return solve(poured, query_row, query_glass);
+    }
+}
