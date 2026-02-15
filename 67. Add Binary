@@ -1,0 +1,46 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        StringBuilder result = new StringBuilder();
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+        int sum = 0;
+        int carry = 0;
+
+        // Continue while at least one string still has digits
+        while (i >= 0 || j >= 0) {
+            sum = carry;
+
+            // If 'a' still has digits left, add its current bit
+            if (i >= 0) {
+                sum += (a.charAt(i) - '0');
+                i--;
+            }
+
+            // If 'b' still has digits left, add its current bit
+            if (j >= 0) {
+                sum += (b.charAt(j) - '0');
+                j--;
+            }
+
+            // Append result bit (sum % 2 gives binary digit)
+            if (sum % 2 == 0)
+                result.append('0');
+            else
+                result.append('1');
+
+            // Update carry for next iteration
+            // If sum is 2 or 3 → carry = 1
+            if (sum > 1)
+                carry = 1;
+            else
+                carry = 0;
+        }
+
+        // If carry remains after finishing both strings
+        if (carry == 1)
+            result.append('1');
+
+        // Reverse the result
+        return result.reverse().toString();
+    }
+}
