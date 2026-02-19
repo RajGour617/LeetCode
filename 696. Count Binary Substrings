@@ -1,0 +1,34 @@
+class Solution {
+    public int countBinarySubstrings(String s) {
+
+        // Stores the length of the previous consecutive group of characters
+        int prevCount = 0;
+
+        // Stores the length of the current consecutive group of characters
+        // We start with 1 because the first character forms a group of at least length 1
+        int currCount = 1;
+
+        int result = 0;
+
+        for (int i = 1; i < s.length(); i++) {
+
+            // If current character is the same as previous character,
+            // we are still in the same group, so increase current group count
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                currCount++;
+            } else { // If the character changes, it means the current group ends here
+                result += Math.min(prevCount, currCount);
+
+                // Update previous group count to current group count
+                prevCount = currCount;
+
+                // Reset current group count for the new character group
+                currCount = 1;
+            }
+        }
+
+        // After loop ends, we still need to add the last pair of groups
+        // since the final group won't trigger the else condition
+        return result + Math.min(prevCount, currCount);
+    }
+}
