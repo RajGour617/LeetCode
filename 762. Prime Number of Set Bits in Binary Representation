@@ -1,0 +1,26 @@
+class Solution {
+    public int countPrimeSetBits(int left, int right) {
+        int count = 0;
+        for (int i = left; i <= right; i++) {
+            // Count number of 1s in the binary representation of i
+            int setBits = Integer.bitCount(i);
+            if (isPrime(setBits))
+                count++;
+        }
+
+        return count;
+    }
+
+    private boolean isPrime(int n) {
+        if (n < 2)
+            return false;
+
+        // We use i * i <= n instead of sqrt(n) for efficiency
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0)
+                return false;
+        }
+
+        return true;
+    }
+}
