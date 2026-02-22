@@ -1,0 +1,32 @@
+class Solution {
+    public int scoreDifference(int[] nums) {
+        int firstScore = 0;
+        int secondScore = 0;
+
+        // 0 = first player active
+        // 1 = second player active
+        int active = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+
+            // Rule 1: swap if points are odd
+            if (nums[i] % 2 == 1) {
+                active ^= 1; // toggle between 0 and 1
+            }
+
+            // Rule 2: swap on every 6th game (index 5, 11, 17...)
+            if (i % 6 == 5) {
+                active ^= 1;
+            }
+
+            // Active player gains points
+            if (active == 0) {
+                firstScore += nums[i];
+            } else {
+                secondScore += nums[i];
+            }
+        }
+
+        return firstScore - secondScore;
+    }
+}
