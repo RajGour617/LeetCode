@@ -1,0 +1,23 @@
+class Solution {
+    public int binaryGap(int n) {
+        String bin = Integer.toBinaryString(n);
+        int prev = -1; // Stores the index of the previous '1'
+        int maxGap = 0;
+
+        for (int i = 0; i < bin.length(); i++) {
+
+            if (bin.charAt(i) == '1') {
+
+                // If this is not the first '1' we've encountered
+                if (prev != -1) {
+                    maxGap = Math.max(maxGap, i - prev);
+                }
+
+                // Update prev to the current index
+                prev = i;
+            }
+        }
+
+        return maxGap;
+    }
+}
