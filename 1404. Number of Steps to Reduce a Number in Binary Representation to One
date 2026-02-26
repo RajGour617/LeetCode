@@ -1,0 +1,19 @@
+import java.math.BigInteger;
+
+class Solution {
+    public int numSteps(String s) {
+        int count = 0;
+        BigInteger n = new BigInteger(s, 2);
+
+        while (!n.equals(BigInteger.ONE)) {
+            if (n.mod(BigInteger.TWO).equals(BigInteger.ONE)) {
+                n = n.add(BigInteger.ONE);
+            } else {
+                n = n.divide(BigInteger.TWO);
+            }
+            count++;
+        }
+
+        return count;
+    }
+}
