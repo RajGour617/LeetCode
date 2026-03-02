@@ -1,0 +1,19 @@
+class Solution {
+    public String trimTrailingVowels(String s) {
+        int i = s.length() - 1;
+
+        // Move left while character is a vowel
+        while (i >= 0 && isVowel(s.charAt(i))) {
+            i--;
+        }
+
+        // Return substring up to last non-vowel
+        return s.substring(0, i + 1);
+    }
+
+    private boolean isVowel(char ch) {
+        return ch == 'a' || ch == 'e' ||
+                ch == 'i' || ch == 'o' ||
+                ch == 'u';
+    }
+}
