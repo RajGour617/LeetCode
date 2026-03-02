@@ -1,0 +1,60 @@
+class Solution {
+
+    public int minSwaps(int[][] grid) {
+
+        int n = grid.length;
+
+        // Array to store number of trailing zeros for each row
+        int[] endZeros = new int[n];
+
+        // Step 1: Compute trailing zeros for every row
+        for (int i = 0; i < n; i++) {
+
+            int j = n - 1;
+            int count = 0;
+
+            // Count consecutive zeros from the end of the row
+            while (j >= 0 && grid[i][j] == 0) {
+                count++;
+                j--;
+            }
+
+            endZeros[i] = count;
+        }
+
+        int steps = 0;
+
+        // Step 2: Try to place rows one by one
+        for (int i = 0; i < n; i++) {
+
+            // Row i must have at least (n - i - 1) trailing zeros
+            int need = n - i - 1;
+
+            int j = i;
+
+            // Find first row below i that satisfies the requirement
+            while (j < n && endZeros[j] < need) {
+                j++;
+            }
+
+            // If no such row exists → impossible
+            if (j == n) {
+                return -1;
+            }
+
+            // Count how many swaps are needed
+            steps += (j - i);
+
+            // Bubble this row upward by adjacent swaps
+            while (j > i) {
+                int temp = endZeros[j];
+                endZeros[j] = endZeros[j - 1];
+                endZeros[j - 1] = temp;
+
+                j--;
+            }
+        }
+
+        return steps;
+    }
+}
