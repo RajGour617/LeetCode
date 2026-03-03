@@ -1,0 +1,70 @@
+// --------------------------------- Approach 1 -----------------------------------------
+
+class Solution {
+    public char findKthBit(int n, int k) {
+        // Base case:
+        // When n == 1, the string S1 = "0"
+        if (n == 1)
+            return '0';
+
+        // Length of Sn = 2^n - 1
+        // (1 << n) is 2^n using bit shifting
+        int len = (1 << n) - 1;
+
+        // Middle position of Sn
+        // The middle character is always '1'
+        int mid = (len + 1) / 2;
+
+        // If k is exactly the middle position,
+        // we return '1'
+        if (k == mid)
+            return '1';
+
+        // If k is in the left half,
+        // it is the same as the k-th bit in S(n-1)
+        if (k < mid)
+            return findKthBit(n - 1, k);
+
+        // If k is in the right half:
+        // It mirrors the left half and is inverted.
+        // Find the mirrored position in S(n-1):
+        // mirrored index = len - k + 1
+        char c = findKthBit(n - 1, len - k + 1);
+
+        // Invert the bit:
+        // '0' becomes '1'
+        // '1' becomes '0'
+        return c == '0' ? '1' : '0';
+    }
+}
+
+
+//--------------------------------- Approach 2 ---------------------------------------
+
+class Solution {
+    public char findKthBit(int n, int k) {
+        if (n == 1)
+            return '0';
+        String s[] = new String[n];
+        s[0] = "0";
+        for (int i = 1; i < n; i++) {
+            s[i] = s[i - 1] + "1" + reverse(inverse(s[i - 1]));
+        }
+        String res = s[n - 1];
+        return res.charAt(k - 1);
+    }
+
+    public String inverse(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            sb.append(c == '0' ? "1" : "0");
+        }
+        return sb.toString();
+    }
+
+    public String reverse(String s) {
+        StringBuilder sb = new StringBuilder(s);
+        return sb.reverse().toString();
+    }
+}
