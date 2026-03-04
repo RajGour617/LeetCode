@@ -1,0 +1,49 @@
+class Solution {
+
+    public int numSpecial(int[][] mat) {
+
+        // Number of rows and columns in the matrix
+        int m = mat.length, n = mat[0].length;
+
+        // Arrays to store count of 1s in each row and column
+        int[] row = new int[m];
+        int[] col = new int[n];
+
+        // Step 1: Count how many 1s appear in each row and column
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+
+                // If current cell contains 1
+                if (mat[i][j] == 1) {
+
+                    // Increment count of 1s for that row
+                    row[i]++;
+
+                    // Increment count of 1s for that column
+                    col[j]++;
+                }
+            }
+        }
+
+        int ans = 0;
+
+        // Step 2: Find special positions
+        // A position (i, j) is special if:
+        // 1. mat[i][j] == 1
+        // 2. It is the only 1 in its row
+        // 3. It is the only 1 in its column
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+
+                if (mat[i][j] == 1 && row[i] == 1 && col[j] == 1) {
+
+                    // This cell satisfies the special condition
+                    ans++;
+                }
+            }
+        }
+
+        // Return total number of special positions
+        return ans;
+    }
+}
