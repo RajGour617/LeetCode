@@ -1,0 +1,31 @@
+class Solution {
+
+    public int minOperations(String s) {
+
+        // Count mismatches for both alternating patterns
+        int changes1 = 0; // pattern: 010101...
+        int changes2 = 0; // pattern: 101010...
+
+        for (int i = 0; i < s.length(); i++) {
+
+            // Expected character for pattern1 (0 at even index)
+            char expected1 = (i % 2 == 0) ? '0' : '1';
+
+            // Expected character for pattern2 (1 at even index)
+            char expected2 = (i % 2 == 0) ? '1' : '0';
+
+            // If current character does not match pattern1
+            if (s.charAt(i) != expected1) {
+                changes1++;
+            }
+
+            // If current character does not match pattern2
+            if (s.charAt(i) != expected2) {
+                changes2++;
+            }
+        }
+
+        // Minimum operations needed to convert into either pattern
+        return Math.min(changes1, changes2);
+    }
+}
