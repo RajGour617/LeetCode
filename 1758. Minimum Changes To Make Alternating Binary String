@@ -1,3 +1,5 @@
+// ---------------------------- Approach 1 ---------------------------------------
+
 class Solution {
 
     public int minOperations(String s) {
@@ -27,5 +29,33 @@ class Solution {
 
         // Minimum operations needed to convert into either pattern
         return Math.min(changes1, changes2);
+    }
+}
+
+// --------------------------- Approach 2 -------------------------------------
+
+class Solution {
+
+    public int minOperations(String s) {
+
+        int changes1 = solve(s, '0');
+        int changes2 = solve(s, '1');
+
+        return Math.min(changes1, changes2);
+    }
+
+    private int solve(String s, char c) {
+        int changes = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+
+            if (i % 2 == 0 && s.charAt(i) != c) {
+                changes++;
+            } else if (i % 2 == 1 && s.charAt(i) == c) {
+                changes++;
+            }
+        }
+
+        return changes;
     }
 }
