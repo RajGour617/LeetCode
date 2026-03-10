@@ -1,0 +1,39 @@
+class Solution {
+
+    public int[] minDistinctFreqPair(int[] nums) {
+
+        // Frequency array to store how many times each number appears
+        // Since nums[i] ≤ 100, we create a frequency array of size 101
+        int freq[] = new int[101];
+
+        // Sort the array so that the smallest element comes first
+        Arrays.sort(nums);
+
+        // Count frequency of each number in nums
+        for (int i : nums) {
+            freq[i]++;
+        }
+
+        // Take the smallest element in the array
+        int min = nums[0];
+
+        // Frequency of the smallest element
+        int minfreq = freq[min];
+
+        // Traverse through the array again
+        for (int i : nums) {
+
+            // Check two conditions:
+            // 1. The number should not be the same as the smallest element
+            // 2. Its frequency should be different from the smallest element's frequency
+            if (i != min && minfreq != freq[i]) {
+
+                // If both conditions hold, return the pair
+                return new int[] { min, i };
+            }
+        }
+
+        // If no such pair exists, return {-1, -1}
+        return new int[] { -1, -1 };
+    }
+}
