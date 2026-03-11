@@ -1,0 +1,51 @@
+// ----------------------------- C++ ------------------------------------
+
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+        for( char c : s ) {
+            if(c=='(' || c=='{' || c=='[') {
+                st.push(c);
+            }
+            else{
+                if(st.empty() || 
+                    (c==')' && st.top()!='(') || 
+                    (c=='}' && st.top()!='{') || 
+                    (c==']' && st.top()!='[')) {
+
+                    return false;
+                }
+                st.pop();
+            }
+        }
+
+        return st.empty();
+    }
+};
+
+
+// ----------------------------------- Java ----------------------------------
+
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> st = new Stack<>();
+
+        for (char c : s.toCharArray()) {
+            if ((c == '(') || (c == '{') || (c == '[')) {
+                st.push(c);
+            } else {
+                if (st.empty() ||
+                        ((c == ')') && st.peek() != '(') ||
+                        ((c == '}') && st.peek() != '{') ||
+                        ((c == ']') && st.peek() != '[')) {
+
+                    return false;
+                }
+                st.pop();
+            }
+        }
+
+        return st.empty();
+    }
+}
