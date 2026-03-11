@@ -1,0 +1,16 @@
+class Solution {
+    public int bitwiseComplement(int n) {
+        String bin = Integer.toBinaryString(n);
+        StringBuilder comp = new StringBuilder();
+
+        for (char c : bin.toCharArray()) {
+            if (c == '0') {
+                comp.append('1');
+            } else {
+                comp.append('0');
+            }
+        }
+
+        return Integer.parseInt(comp.toString(), 2);
+    }
+}
