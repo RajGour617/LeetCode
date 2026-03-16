@@ -1,0 +1,30 @@
+class Solution {
+    public int minCost(int[] nums1, int[] nums2) {
+
+        int MAX = 80001;
+
+        int[] freq1 = new int[MAX];
+        int[] freq2 = new int[MAX];
+
+        for (int n : nums1)
+            freq1[n]++;
+        for (int n : nums2)
+            freq2[n]++;
+
+        int mismatches = 0;
+
+        for (int i = 0; i < MAX; i++) {
+
+            int total = freq1[i] + freq2[i];
+
+            // impossible case (odd frequency)
+            if (total % 2 != 0)
+                return -1;
+
+            mismatches += Math.abs(freq1[i] - freq2[i]) / 2;
+        }
+
+        // each cross swap fixes two mismatches
+        return mismatches / 2;
+    }
+}
