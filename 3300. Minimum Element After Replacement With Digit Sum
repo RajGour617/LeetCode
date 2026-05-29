@@ -1,0 +1,24 @@
+class Solution {
+    public int minElement(int[] nums) {
+        int sum = 0;
+        int res = Integer.MAX_VALUE;
+
+        for (int i = 0; i < nums.length; i++) {
+            sum = calculateSum(nums[i]);
+            res = Math.min(sum, res);
+        }
+
+        return res;
+    }
+
+    private int calculateSum(int n) {
+        int sum = 0;
+        while (n > 0) {
+            sum += (n % 10);
+            n /= 10;
+        }
+
+        return sum;
+    }
+
+}
