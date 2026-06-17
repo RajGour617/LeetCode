@@ -1,3 +1,23 @@
+# Approach 1:
+class Solution {
+    public boolean checkGoodInteger(int n) {
+        int temp = n;
+        int digitSum = 0;
+        int squareSum = 0;
+
+        while (temp > 0) {
+            int digit = temp % 10;
+            digitSum += digit;
+            squareSum += (digit * digit);
+            temp /= 10;
+        }
+
+        return ((squareSum - digitSum) >= 50);
+    }
+}
+
+
+# Approach 2:
 class Solution {
     public boolean checkGoodInteger(int n) {
         return ((squareSum(n) - digitSum(n)) >= 50);
