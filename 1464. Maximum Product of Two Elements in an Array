@@ -3,7 +3,7 @@
 ## Time Complexity: O(nlogn)
 ## Space COmplexity: O(1)
 
-'''
+```
 class Solution {
     public int maxProduct(int[] nums) {
         int n = nums.length;
@@ -12,14 +12,14 @@ class Solution {
         return ((nums[n - 1] - 1) * (nums[n - 2] - 1));
     }
 }
-'''
+```
 
 # Approach 2:
 
 ## Time Complexity: O(n)
 ## Space COmplexity: O(1)
 
-'''
+```
 class Solution {
     public int maxProduct(int[] nums) {
         int n = nums.length;
@@ -38,4 +38,4 @@ class Solution {
         return (max1 - 1) * (max2 - 1);
     }
 }
-'''
+```
