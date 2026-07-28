@@ -1,0 +1,67 @@
+# Complexity
+## Time complexity: O(m+n)
+## Space complexity: O(m+n)
+
+# Code
+```C++ []
+class Solution {
+public:
+    
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int j=0;
+        for(int i=m;i<m+n;i++){
+            nums1[i]=nums2[j];
+            j++;
+        }
+        sort(nums1.begin(),nums1.end());
+    }
+};
+```
+
+```C++ []
+class Solution {
+public:
+    
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int i=m-1,j=n-1,k=m+n-1;
+        while(j>=0){
+            if(i>=0 && nums1[i]>nums2[j])
+                nums1[k--]=nums1[i--];
+            else
+                nums1[k--]=nums2[j--];
+        }
+    }
+};
+```
+
+```Java []
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int[] res = new int[m + n];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while (j < m && k < n) {
+            if (nums1[j] <= nums2[k]) {
+                res[i++] = nums1[j++];
+            } else {
+                res[i++] = nums2[k++];
+            }
+        }
+
+        while (j < m) {
+            res[i++] = nums1[j++];
+        }
+
+        while (k < n) {
+            res[i++] = nums2[k++];
+        }
+
+        for (int l = 0; l < n + m; l++) {
+            nums1[l] = res[l];
+        }
+
+    }
+}
+```
