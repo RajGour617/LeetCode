@@ -1,0 +1,44 @@
+# Complexity
+- Time complexity: $$O(N*logN)$$
+
+- Space complexity: $$O(N*logN)$$
+
+# Code
+```java []
+class Solution {
+    public String smallestPalindrome(String s) {
+        int n = s.length();
+        int mid = n / 2;
+
+        char[] charArray = s.toCharArray();
+
+        Arrays.sort(charArray, 0, mid);
+
+        for (int i = 0; i < mid; i++) {
+            charArray[n - 1 - i] = charArray[i];
+        }
+
+        return new String(charArray);
+    }
+}
+```
+
+```C++ []
+class Solution {
+public:
+    string smallestPalindrome(string s) {
+        int n = s.length();
+        int mid = n / 2;
+
+        sort(s.begin(), s.begin() + mid);
+
+        for (int i = 0; i < mid; i++) {
+            s[n - 1 - i] = s[i];
+        }
+
+        return s;
+    }
+};
+```
+
+![upvote.jpg](https://assets.leetcode.com/users/images/3c26e911-b3b5-4c7a-a6dc-b7bb33b6d228_1785251020.7216737.jpeg)
