@@ -1,0 +1,38 @@
+# Key Idea
+Assign most frequent characters to lowest cost positions using greedy strategy.
+
+# Complexity
+- Time complexity: $$O(n*logn)$$
+
+- Space complexity: $$O(1)$$
+
+# Code
+```java []
+class Solution {
+    public int minimumPushes(String word) {
+        int[] freq = new int[26];
+        int result = 0;
+
+        for (char ch : word.toCharArray()) {
+            freq[ch - 'a']++;
+        }
+
+        Arrays.sort(freq);
+        int n = freq.length;
+
+        // Sorting in descending order
+        for (int i = 0; i < n / 2; i++) {
+            int temp = freq[i];
+            freq[i] = freq[n - 1 - i];
+            freq[n - 1 - i] = temp;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            int press = i / 8 + 1;
+            result += (freq[i] * press); // freq * how many times we have to press for the button to write it single time
+        }
+
+        return result;
+    }
+}
+```
