@@ -1,0 +1,76 @@
+#  Approach 1:
+- Applicable only if there are distinct characters in the string.
+
+# Complexity
+- Time complexity: $$O(n)$$
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+- Space complexity: $$O(1)$$
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+# Code
+```java []
+class Solution {
+    public int minimumPushes(String word) {
+        int result = 0;
+
+        HashMap<Integer, Integer> mp = new HashMap<>();
+        int assign_key = 2;
+
+        for (char ch : word.toCharArray()) {
+            if (assign_key > 9) {
+                assign_key = 2;
+            }
+
+            mp.put(assign_key, mp.getOrDefault(assign_key, 0) + 1);
+            result += mp.get(assign_key);
+
+            assign_key++;
+        }
+
+        return result;
+    }
+}
+```
+# Approach 2:
+
+# Key Idea
+Assign most frequent characters to lowest cost positions using greedy strategy.
+
+# Complexity
+- Time complexity: O(n∗logn)
+
+- Space complexity: O(1)
+
+# Code
+```Java []
+class Solution {
+    public int minimumPushes(String word) {
+        int[] freq = new int[26];
+        int result = 0;
+
+        for (char ch : word.toCharArray()) {
+            freq[ch - 'a']++;
+        }
+
+        Arrays.sort(freq);
+        int n = freq.length;
+
+        // Sorting in descending order
+        for (int i = 0; i < n / 2; i++) {
+            int temp = freq[i];
+            freq[i] = freq[n - 1 - i];
+            freq[n - 1 - i] = temp;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            int press = i / 8 + 1;
+            result += (freq[i] * press); // freq * how many times we have to press for the button to write it single time
+        }
+
+        return result;
+    }
+}
+```
+
+![upvote.jpg](https://assets.leetcode.com/users/images/b25d5701-bc04-4ab2-a636-39cace550898_1785507469.3373256.jpeg)
