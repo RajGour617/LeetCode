@@ -1,0 +1,94 @@
+# Approach 1:
+
+# Complexity
+- Time complexity: $$O(nlogn)$$
+
+- Space complexity: $$O(n)$$
+
+# Code
+```java []
+class Solution {
+    public List<Integer> findMissingElements(int[] nums) {
+        int n = nums.length;
+        List<Integer> res = new ArrayList<>();
+
+        Arrays.sort(nums);
+        int max = nums[n - 1];
+
+        boolean[] flag = new boolean[max + 1];
+
+        for (int num : nums) {
+            flag[num] = true;
+        }
+
+        for (int i = nums[0]; i <= nums[n - 1]; i++) {
+            if (flag[i] != true) {
+                res.add(i);
+            }
+        }
+
+        return res;
+    }
+}
+```
+
+# Approach 2:
+
+# Complexity
+- Time complexity: $$O(n^2 + nlogn)$$
+
+- Space complexity: $$O(1)$$
+
+# Code
+```Java []
+class Solution {
+    public List<Integer> findMissingElements(int[] nums) {
+        List<Integer> res = new ArrayList<>();
+        Arrays.sort(nums);
+
+        for (int i = nums[0]; i < nums[nums.length - 1]; i++) {
+            boolean found = false;
+            for (int j = 0; j < nums.length; j++) {
+                if (i == nums[j]) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false) {
+                res.add(i);
+            }
+        }
+
+        return res;
+    }
+}
+```
+
+# Approach 3:
+
+# Complexity
+- Time complexity: $$O(nlogn)$$
+
+- Space complexity: $$O(1)$$
+
+# Code
+```Java []
+class Solution {
+    public List<Integer> findMissingElements(int[] nums) {
+        List<Integer> res = new ArrayList<>();
+        int n = nums.length;
+        Arrays.sort(nums);
+
+        for (int i = 1; i < n; i++) {
+            int curr = nums[i - 1];
+            int next = nums[i];
+
+            for (int j = curr + 1; j < next; j++) {
+                res.add(j);
+            }
+        }
+
+        return res;
+    }
+}
+```
