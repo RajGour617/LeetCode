@@ -1,0 +1,31 @@
+- Let k be the total numbers checked and d be the number of digits
+# Complexity
+- Time complexity: O(k∗d)
+- Space complexity: O(1)
+
+# Code
+'''Java []
+class Solution {
+    public int smallestNumber(int n, int t) {
+        for (int i = n; i < Integer.MAX_VALUE; i++) {
+            if (digitProduct(i) % t == 0) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    private int digitProduct(int n) {
+        int temp = n;
+        int product = 1;
+        while (temp > 0) {
+            int rem = temp % 10;
+            product *= rem;
+            temp /= 10;
+        }
+
+        return product;
+    }
+}
+'''
